@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://dd2b4bnf50t53"]
+
+[sub_resource type="GDScript" id="GDScript_3sau0"]
+resource_name = "email"
+script/source = "extends Control
+
+@export var words: Array[String]
+var chosen_words: Array[String]
+@export var duration := 20.0;
+var duration_buffer: float;
+@onready var v_box_controller = $Control/PanelContainer/MarginContainer/VSplitContainer/VBoxContainer;
+@onready var progress = $Control/PanelContainer/MarginContainer/VSplitContainer/ProgressBar
+
+var active_element;
+var current_character_index := -1;
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Set this minigame's values to scale with the difficulty
+	set_diff();
+	duration_buffer = duration;
+	progress.max_value = duration;
+	progress.value = duration;
+	var rng = RandomNumberGenerator.new();
+	# Get random words
+	for n in 3:
+		var word = words[rng.randi_range(0, words.size() - 1)].to_lower();
+		chosen_words.append(word);
+	
+	# Assign words to elements
+	for index in v_box_controller.get_child_count():
+		var rich_text: RichTextLabel = v_box_controller.get_child(index);
+		rich_text.text = chosen_words[index];
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	duration_buffer -= delta;
+	progress.value = duration_buffer;
+	if duration_buffer < 0.0: queue_free();
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is not InputEventKey and not event.is_pressed(): return;
+	# Get the typed key as a string
+	var keyboard_event = event as InputEventKey;
+	var key_typed = PackedByteArray([keyboard_event.unicode]).get_string_from_utf8();
+	
+	if (active_element == null):
+		# Get the active element
+		get_new_active_word(key_typed);
+	else:
+		# Check if the typed key is the same as the next character
+		var prompt = active_element.get_prompt();
+		var next_character = prompt.substr(current_character_index, 1);
+		if (key_typed == next_character):
+			current_character_index += 1;	# If it is, move to the next letter
+			active_element.set_next_character(current_character_index)
+			if (current_character_index == prompt.length()):	# Reset values if the word has been typed
+				current_character_index == -1;
+				active_element.queue_free()
+				active_element = null;
+
+
+func get_new_active_word(typed_character: String):
+	# Check all rich text nodes to see if one of them begins with the typed letter; if so, its the new active word
+	for child: RichTextLabel in v_box_controller.get_children():
+		var prompt = child.get_prompt();
+		var next_character = prompt.substr(0, 1);
+		if next_character != typed_character: return;
+		active_element = child;
+		current_character_index = 1;
+		active_element.set_next_character(current_character_index)
+
+
+func _on_v_box_container_completed() -> void:
+	queue_free()
+
+
+func set_diff() -> void:
+	var controller = get_parent();
+	if (controller.has_method(\"get_difficulty\")): duration /= controller.get_difficulty() / 6;
+"
+
+[sub_resource type="GDScript" id="GDScript_eu6v1"]
+resource_name = "detect_children"
+script/source = "extends VBoxContainer
+
+signal completed;
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if (get_child_count() > 0): return;
+	completed.emit();
+	queue_free();
+"
+
+[sub_resource type="GDScript" id="GDScript_3f12i"]
+resource_name = "text_element"
+script/source = "extends RichTextLabel
+
+@export var default_color := Color.WHITE;
+@export var success_color := Color.BURLYWOOD;
+
+func get_prompt() -> String:
+	return text;
+
+func set_next_character(next_character_index: int) -> void:
+	var default_text = get_bbcode_color_tag(default_color, text.substr(next_character_index, text.length() - next_character_index))
+	var success_text = get_bbcode_color_tag(success_color, text.substr(0, next_character_index))
+	parse_bbcode(success_text + default_text)
+
+
+func get_bbcode_color_tag(color: Color, text: String) -> String:
+	return \"[color=#\" + color.to_html(false) + \"]\" + text + \"[/color]\";
+"
+
+[node name="EmailDistraction" type="CanvasLayer" unique_id=608218343]
+script = SubResource("GDScript_3sau0")
+words = Array[String](["embezzlement", "thorough", "conscientiousness", "consciousness", "sanguine", "anachronism", "Cacophony", "Flabbergasted", "Pernicious", "Indefatigable"])
+
+[node name="Control" type="Control" parent="." unique_id=1964646450]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1711491487]
+layout_mode = 0
+offset_left = -172.0
+offset_top = -162.0
+offset_right = 173.0
+offset_bottom = 162.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=1628716980]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Control/PanelContainer/MarginContainer" unique_id=240332112]
+layout_mode = 2
+theme_override_constants/separation = 8
+split_offsets = PackedInt32Array(4)
+split_offset = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/PanelContainer/MarginContainer/VSplitContainer" unique_id=1341219954]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+offset_transform_enabled = true
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer/VSplitContainer" unique_id=1936583620]
+layout_mode = 2
+theme_override_constants/separation = 12
+script = SubResource("GDScript_eu6v1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer/VSplitContainer/VBoxContainer" unique_id=2096586680]
+layout_mode = 2
+bbcode_enabled = true
+text = "lorem ipsum"
+fit_content = true
+scroll_active = false
+script = SubResource("GDScript_3f12i")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer/VSplitContainer/VBoxContainer" unique_id=1878516593]
+layout_mode = 2
+bbcode_enabled = true
+text = "lorem ipsum"
+fit_content = true
+scroll_active = false
+script = SubResource("GDScript_3f12i")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer/VSplitContainer/VBoxContainer" unique_id=1147517633]
+layout_mode = 2
+bbcode_enabled = true
+text = "lorem ipsum"
+fit_content = true
+scroll_active = false
+script = SubResource("GDScript_3f12i")
+
+[connection signal="completed" from="Control/PanelContainer/MarginContainer/VSplitContainer/VBoxContainer" to="." method="_on_v_box_container_completed"]

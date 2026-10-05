@@ -6,15 +6,12 @@ var chosen_words: Array[String]
 var duration_buffer: float;
 @onready var v_box_controller := $PanelContainer/MarginContainer/VSplitContainer/VBoxContainer;
 @onready var progress := $PanelContainer/MarginContainer/VSplitContainer/ProgressBar
-var hard_mode: bool;
-@export var prompts_amount := 3;
 
 var active_element;
 var current_character_index := -1;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_words(hard_mode);
 	# Set this minigame's values to scale with the difficulty
 	scale_with_difficulty();
 	duration_buffer = duration;
@@ -25,7 +22,7 @@ func _ready() -> void:
 	for n in 3:
 		var word := words[rng.randi_range(0, words.size() - 1)].to_lower();
 		chosen_words.append(word);
-
+	
 	# Assign words to elements
 	for index in v_box_controller.get_child_count():
 		var rich_text: RichTextLabel = v_box_controller.get_child(index);
@@ -80,25 +77,8 @@ func scale_with_difficulty() -> void:
 	var diff: float = controller.get_difficulty();
 	var new_duration := -5 * log(diff + 1.0) + duration;	# If time needs to be extended, increase duration; if the curve needs to be deeper, increase the first number
 	duration = new_duration;
+	print(duration);
 
 
 func _on_v_box_container_completed() -> void:
 	queue_free();
-
-
-func get_words(hard_mode := false) -> void:
-	# Generate n amount of words/hashes
-	for i in prompts_amount:
-		var word := get_random_word() if !hard_mode else generate_hash();	# If hard mode is false, get a word from the list; 
-																			# otherwise, generate a hash that's string_length characters long
-		chosen_words.append(word);	# Append the word
-	hard_mode = false;	# idc turn that off whenever you make words
-
-func generate_hash(string_length := 8) -> String:
-	var hash_string := str(pow(Time.get_unix_time_from_system(), 3)).right(string_length)
-	var mail_hash := hash_string.sha256_text();	# Multiply by 100,000 to get an integer
-	return mail_hash.left(string_length).to_lower();
-
-func get_random_word() -> String:
-	var rng := RandomNumberGenerator.new();
-	return words[rng.randi_range(0, words.size() - 1)].to_lower();
