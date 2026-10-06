@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dpbe70km53cge"]
+
+[ext_resource type="Script" uid="uid://bamvj5rhwejph" path="res://Code/Room logic/map_button.gd" id="1_5bu6o"]
+[ext_resource type="Texture2D" uid="uid://cyu3x8liwt2y2" path="res://Sprites/UI/genButton1.png" id="1_getgh"]
+
+[node name="MapButton" type="NinePatchRect" unique_id=681569220]
+texture = ExtResource("1_getgh")
+script = ExtResource("1_5bu6o")
+metadata/_custom_type_script = "uid://bamvj5rhwejph"
+
+[node name="Button" type="Button" parent="." unique_id=84284890]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "lorem ip"

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://chvr48jougy1h"]
+
+[ext_resource type="Texture2D" uid="uid://cyu3x8liwt2y2" path="res://Sprites/UI/genButton1.png" id="1_8rips"]
+
+[node name="UiTest" type="Control" unique_id=1708987445]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1505941870]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer" unique_id=1973509434]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+texture = ExtResource("1_8rips")

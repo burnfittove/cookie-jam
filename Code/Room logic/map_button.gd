@@ -1,4 +1,4 @@
-class_name MapButton extends Button
+class_name MapButton extends NinePatchRect
 
 @export var room: PackedScene
 @export var room_type: Rooms.Room_Type
