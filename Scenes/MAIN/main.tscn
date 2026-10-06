@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cs4aihcoijnos" path="res://Scenes/Map/map.tscn" id="3_6j7wv"]
 [ext_resource type="PackedScene" uid="uid://xjuw67uvcgrc" path="res://Scenes/global-timer.tscn" id="4_33lhf"]
 [ext_resource type="PackedScene" uid="uid://dbxwhb0mhls3w" path="res://Ian/Distractions/Cookie Collector/cookie-collector.tscn" id="5_n2fwa"]
+[ext_resource type="PackedScene" uid="uid://biytdmqhtbbx7" path="res://Scenes/Borna/HonsGame/honse_controller.tscn" id="6_u5tma"]
 
 [node name="Main" type="Node" unique_id=927148709]
 
-[node name="RoomManager" parent="." unique_id=259202658 node_paths=PackedStringArray("map") instance=ExtResource("1_j0i0r")]
-map = NodePath("")
+[node name="RoomManager" parent="." unique_id=259202658 instance=ExtResource("1_j0i0r")]
 current_room_type = 1
 
 [node name="EmailController" parent="." unique_id=1587489003 instance=ExtResource("2_u5tma")]
@@ -21,3 +21,5 @@ difficulty = 30
 [node name="GlobalTimer" parent="." unique_id=296257864 instance=ExtResource("4_33lhf")]
 
 [node name="CookieCollector" parent="." unique_id=1791148422 instance=ExtResource("5_n2fwa")]
+
+[node name="HonseController" parent="." unique_id=535942946 instance=ExtResource("6_u5tma")]

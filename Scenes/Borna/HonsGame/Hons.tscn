@@ -8,34 +8,36 @@
 [sub_resource type="LabelSettings" id="LabelSettings_pbqp2"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="Node2D" type="CanvasLayer" unique_id=209692651]
+[node name="Node2D" type="Control" unique_id=392579907]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_i40fx")
 
 [node name="Bg" type="Sprite2D" parent="." unique_id=785709633]
-position = Vector2(429, 268)
-rotation = -6.2831855
 texture = ExtResource("2_5moti")
 
 [node name="Ground" parent="." unique_id=1851720191 instance=ExtResource("1_iig63")]
-position = Vector2(-11, 0)
+position = Vector2(-440, -268)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=822775577]
+visible = false
 position = Vector2(578, 325)
 
 [node name="HonsChar" parent="." unique_id=1616022542 instance=ExtResource("3_swgoe")]
-position = Vector2(325, 409)
+position = Vector2(-104, 141)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=941570388]
-position = Vector2(576, 414)
+position = Vector2(147, 146)
 
 [node name="Timer" type="Timer" parent="." unique_id=76687184]
 one_shot = true
 
 [node name="Label" type="Label" parent="." unique_id=1548189991]
-offset_left = 276.0
-offset_top = 103.0
-offset_right = 316.0
-offset_bottom = 126.0
+layout_mode = 0
+offset_left = -153.0
+offset_top = -165.0
+offset_right = -113.0
+offset_bottom = -142.0
 label_settings = SubResource("LabelSettings_pbqp2")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

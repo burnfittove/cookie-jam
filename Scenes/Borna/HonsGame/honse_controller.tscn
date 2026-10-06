@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://biytdmqhtbbx7"]
 
 [ext_resource type="Script" uid="uid://bqf7nr863lmpv" path="res://Scenes/Borna/hons_popup_controller.gd" id="1_to3rs"]
+[ext_resource type="PackedScene" uid="uid://dfgltatfwx6kx" path="res://Scenes/Borna/HonsGame/Hons.tscn" id="2_hqtx0"]
 
 [node name="HonseController" type="Node" unique_id=535942946]
 script = ExtResource("1_to3rs")
+interval = 1
+distraction_scene = ExtResource("2_hqtx0")
 metadata/_custom_type_script = "uid://bqf7nr863lmpv"
