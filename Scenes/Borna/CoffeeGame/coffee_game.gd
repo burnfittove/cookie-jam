@@ -1,10 +1,10 @@
 extends Node2D
-var coffee=preload("res://Scenes/Borna/CoffeeGame/coffee.tscn")
+var coffee := preload("res://Scenes/Borna/CoffeeGame/Coffee.tscn")
 var obstacle_types:=[coffee]
 var can_spawn:=true
 #vars
 const hons_start_pos := Vector2i(310,423)
-@onready var score_label = $ScoreLabel
+@onready var score_label := $ScoreLabel
 
 var score := 0
 

@@ -5,7 +5,7 @@ class_name MapButton extends Button
 var room_manager: RoomManager
 
 func _ready() -> void:
-	room_manager = get_node("/root/IanTestScene/RoomManager");
+	room_manager = get_node("/root/Main/RoomManager");
 
 func _on_pressed() -> void:
 	if (room_manager == null): 

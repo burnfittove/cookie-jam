@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://biytdmqhtbbx7"]
+
+[ext_resource type="Script" uid="uid://bqf7nr863lmpv" path="res://Scenes/Borna/hons_popup_controller.gd" id="1_to3rs"]
+
+[node name="HonseController" type="Node" unique_id=535942946]
+script = ExtResource("1_to3rs")
+metadata/_custom_type_script = "uid://bqf7nr863lmpv"

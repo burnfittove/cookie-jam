@@ -1,1 +1,1 @@
-class_name  honspopup extends DistractionControllerBase
+class_name HonsPopupController extends DistractionControllerBase
