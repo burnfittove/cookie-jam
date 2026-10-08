@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fb8rpf2svg1d" path="res://Scenes/Borna/Minesweeper/minesweeper.gd" id="1_on8nw"]
 [ext_resource type="Script" uid="uid://wcrmhf0scv2f" path="res://Scenes/Borna/Minesweeper/gridcontainer_ms.gd" id="1_qoddk"]
+[ext_resource type="Texture2D" uid="uid://cb7drplg327yb" path="res://Scenes/Borna/Minesweeper/Sweepersprites/sweeperbg.png" id="2_e7065"]
 [ext_resource type="Texture2D" uid="uid://dikas3lfhj2yt" path="res://Scenes/Borna/Minesweeper/Sweepersprites/covered.png" id="3_4uaa7"]
 [ext_resource type="AudioStream" uid="uid://bujf2v2hrkpbs" path="res://Scenes/Borna/BORNA TESTING/TEMPSOUNDS/click.mp3" id="3_hk2du"]
 [ext_resource type="Texture2D" uid="uid://r2br2kgqkudl" path="res://Scenes/Borna/Minesweeper/Sweepersprites/coveredhover.png" id="4_e7065"]
@@ -12,6 +13,10 @@ data = PackedByteArray("SUQzBAAAAAAAfVRJVDIAAAAbAAADQ1JPV0QgU01BTEwgQ0hJTF9FQzA0
 
 [node name="Minesweeper" type="Node2D" unique_id=1647514579]
 script = ExtResource("1_on8nw")
+
+[node name="Sweeperbg" type="Sprite2D" parent="." unique_id=1197445654]
+position = Vector2(-1, -3)
+texture = ExtResource("2_e7065")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1530210954]
 visible = false

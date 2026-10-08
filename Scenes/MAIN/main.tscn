@@ -22,12 +22,12 @@ max_rand_num = 50
 check_for_active_room = true
 
 [node name="HonsController" parent="." unique_id=459550278 instance=ExtResource("7_6j7wv")]
-interval = 32
+interval = 22
 difficulty = 1
 check_for_active_room = true
 
 [node name="Sweeper_controller" parent="." unique_id=1424258307 instance=ExtResource("8_33lhf")]
-interval = 80
+interval = 1
 check_for_active_room = true
 
 [node name="Match3Controller" parent="." unique_id=1161232812 instance=ExtResource("5_n2fwa")]
