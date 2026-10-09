@@ -1,4 +1,4 @@
-class_name RoomManager extends Node
+extends Node
 
 @export var start_room: PackedScene
 @export var map: Map;

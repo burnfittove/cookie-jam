@@ -6,3 +6,4 @@
 [node name="RoomManager" type="Node2D" unique_id=259202658]
 script = ExtResource("1_61ql1")
 start_room = ExtResource("2_qxubt")
+current_room_type = 1

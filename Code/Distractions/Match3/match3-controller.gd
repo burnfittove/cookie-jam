@@ -7,7 +7,7 @@ func start_game() -> void:
 	add_child(scene_instance);
 	
 	# Sound the alarm
-	if (room_manager.current_room_type != active_room):
+	if (RoomManager.current_room_type != active_room):
 		var warning_scene := warning.instantiate();
 		add_child(warning_scene);
 	
