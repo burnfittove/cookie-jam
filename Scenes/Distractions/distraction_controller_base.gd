@@ -10,7 +10,6 @@ var interval_buffer;
 @export var check_for_other_distractions := true;
 var attack_stored := false;
 var is_distraction_active := false;
-var room_manager;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,10 +46,13 @@ func _process(delta: float) -> void:
 	# Check if the player is in the active room, if not store the attack
 	if (!check_for_active_room):
 		start_game();
+		print("1")
 	if (RoomManager.current_room_type != active_room):
 		attack_stored = true;
+		print("2")
 	elif (check_for_active_room):
 		start_game();
+		print("3");
 
 func can_spawn(min_chance: int, max_chance: int) -> bool:
 	var rng := RandomNumberGenerator.new();
@@ -76,8 +78,7 @@ func check_for_visibility() -> bool:
 
 func set_children_state(active: bool) -> void:
 	if (get_child_count() == 0): return;
-	for child in get_children():
-		if (child == null): return;
-		if (active): child.show();
-		else: child.hide();	
-	
+	var child := get_child(0);
+	if (child == null): return;
+	if (active): child.show();
+	else: child.hide();

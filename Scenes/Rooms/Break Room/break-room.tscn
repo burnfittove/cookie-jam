@@ -1,29 +1,10 @@
 [gd_scene format=3 uid="uid://nw7xrkfhy0rl"]
 
-[ext_resource type="Texture2D" uid="uid://c7w8yowyluqcp" path="res://Sprites/Room Sprites/Coffee/wall.png" id="1_hrqom"]
 [ext_resource type="Texture2D" uid="uid://ygdvn74t1aco" path="res://Sprites/Room Sprites/Coffee/coffee_machine.png" id="2_hrqom"]
 
 [node name="BreakRoom" type="Node" unique_id=533714966]
 
-[node name="Bg" type="Sprite2D" parent="." unique_id=905746417]
-z_index = -10
-position = Vector2(958, 540)
-scale = Vector2(1.9460001, 1.1)
-texture = ExtResource("1_hrqom")
-
-[node name="Screen" type="Sprite2D" parent="." unique_id=785283045]
-self_modulate = Color(0.10747976, 0.10747973, 0.10747973, 1)
-z_index = -5
-position = Vector2(959.99994, 377)
-scale = Vector2(0.70000005, 0.768)
-texture = ExtResource("1_hrqom")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=361197269]
-z_index = 128
-position = Vector2(954, 540)
-texture = ExtResource("2_hrqom")
-
-[node name="Coffee Cup" type="Sprite2D" parent="." unique_id=512160089]
 z_index = 128
 position = Vector2(954, 540)
 texture = ExtResource("2_hrqom")

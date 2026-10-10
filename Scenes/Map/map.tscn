@@ -46,7 +46,6 @@ theme_override_constants/margin_left = 52
 theme_override_constants/margin_top = 52
 
 [node name="PanelContainer" type="PanelContainer" parent="Control/NinePatchRect/MarginContainer" unique_id=135512231]
-texture_filter = 1
 custom_maximum_size = Vector2(320, 320)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_anho1")

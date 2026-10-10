@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ko2pt8tqdrox"]
 
 [ext_resource type="Script" uid="uid://by5scwxn4bxk3" path="res://Scenes/Borna/CoffeeGame/coffee_char.gd" id="1_brulo"]
-[ext_resource type="Texture2D" uid="uid://dffjrifvw2br2" path="res://Sprites/UI Textures/coffe_cup_open_table.png" id="2_brulo"]
+[ext_resource type="Texture2D" uid="uid://d2h6kg1cny2am" path="res://Sprites/CoffeeTempArt/cup.png" id="1_w8pnp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fwcc"]
-size = Vector2(44.5, 42)
+size = Vector2(45, 39)
 
 [node name="CoffeeChar" type="CharacterBody2D" unique_id=1537344380]
 scale = Vector2(0.5, 0.5)
@@ -12,9 +12,8 @@ script = ExtResource("1_brulo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=630989717]
 position = Vector2(0, -1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_brulo")
+texture = ExtResource("1_w8pnp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=285514748]
-position = Vector2(1.75, -1)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_0fwcc")
