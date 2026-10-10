@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bekrn0gjsdt0o"]
+
+[ext_resource type="Texture2D" uid="uid://c50i8i8yijuwh" path="res://Sprites/HonsSprites/bg.png" id="1_crfs3"]
+
+[sub_resource type="GDScript" id="GDScript_crfs3"]
+resource_name = "fade_control"
+script/source = "extends CanvasLayer
+
+@onready var texture = $CenterContainer/TextureRect
+@export var trans_time = .6
+
+func _ready() -> void:
+	texture.modulate.a = 0;
+
+func fade_in(is_async := true) -> bool:
+	var tween = create_tween()
+	tween.tween_property(texture, \"modulate\", Color(0, 0, 0, 1), trans_time);
+	if is_async: await tween.finished;
+	return true;
+
+func fade_out(is_async := true) -> bool:
+	var tween = create_tween()
+	tween.tween_property(texture, \"modulate\", Color(0, 0, 0, 0), trans_time);
+	if is_async: await tween.finished;
+	return true;
+"
+
+[node name="SceneTransition" type="CanvasLayer" unique_id=1106440384]
+script = SubResource("GDScript_crfs3")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1364334822]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=802721928]
+modulate = Color(0.07683582, 0.07683582, 0.07683582, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(6, 3.2)
+mouse_filter = 2
+texture = ExtResource("1_crfs3")

@@ -22,6 +22,7 @@ GlobalDistractionManager="*uid://clwpns0aoyqw2"
 GlobalStrikeManager="*uid://ceketw1jnsikq"
 GlobalSoundManager="*uid://be1pry56fhtvn"
 RoomManager="*uid://cpp68tkmmsj88"
+SceneTransition="*uid://bekrn0gjsdt0o"
 
 [display]
 

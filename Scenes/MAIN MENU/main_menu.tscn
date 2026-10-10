@@ -1,16 +1,12 @@
 [gd_scene format=3 uid="uid://cgkl4wled0cxi"]
 
 [ext_resource type="FontFile" uid="uid://bforhk8nk0fsu" path="res://Font/AveriaLibre/AveriaLibre-Regular.ttf" id="1_0ki4d"]
+[ext_resource type="Script" uid="uid://du6n2044iuyof" path="res://Scenes/MAIN MENU/Code/quit_game.gd" id="2_nelnv"]
+[ext_resource type="Script" uid="uid://cqg4h4bhyqn1i" path="res://Scenes/MAIN MENU/Code/start_game.gd" id="2_ntrau"]
+[ext_resource type="PackedScene" uid="uid://lbnjejiorve4" path="res://Scenes/MAIN/main_game.tscn" id="3_1f6jl"]
 
 [sub_resource type="FontVariation" id="FontVariation_r5n4g"]
 base_font = ExtResource("1_0ki4d")
-
-[sub_resource type="GDScript" id="GDScript_0ki4d"]
-resource_name = "load_scene"
-script/source = "extends Button
-
-@onready var room_manager := preload(\"res://Scenes/room-manager.tscn\");
-"
 
 [node name="MainMenu" type="Node" unique_id=675629198]
 
@@ -40,19 +36,24 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_constants/separation = 96
 
-[node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1685726590]
+[node name="Start Game" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1685726590]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../Button2")
+focus_neighbor_bottom = NodePath("../Quit Game")
 theme_override_fonts/font = SubResource("FontVariation_r5n4g")
 theme_override_font_sizes/font_size = 52
 text = "Work"
-script = SubResource("GDScript_0ki4d")
+script = ExtResource("2_ntrau")
+next_scene = ExtResource("3_1f6jl")
 
-[node name="Button2" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1375595458]
+[node name="Quit Game" type="Button" parent="Control/MarginContainer/VBoxContainer" unique_id=1375595458]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
-focus_neighbor_top = NodePath("../Button")
+focus_neighbor_top = NodePath("../Start Game")
 theme_override_fonts/font = SubResource("FontVariation_r5n4g")
 theme_override_font_sizes/font_size = 52
 text = "Quit"
+script = ExtResource("2_nelnv")
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Start Game" to="Control/MarginContainer/VBoxContainer/Start Game" method="_on_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Quit Game" to="Control/MarginContainer/VBoxContainer/Quit Game" method="_on_pressed"]
