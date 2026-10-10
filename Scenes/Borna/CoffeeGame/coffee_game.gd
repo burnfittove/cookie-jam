@@ -1,12 +1,19 @@
 extends Node2D
 var coffee := preload("res://Scenes/Borna/CoffeeGame/Coffee.tscn")
-var obstacle_types:=[coffee]
+var loops := preload("res://Scenes/Borna/CoffeeGame/fruit_loop.tscn")
+var sugar := preload("res://Scenes/Borna/CoffeeGame/Sugar.tscn")
+var obstacle_types:=[
+	coffee,
+	loops,
+	sugar
+]
 var can_spawn:=true
 var winscore
 #vars
 const hons_start_pos := Vector2i(310,423)
 @onready var score_label := $MarginContainer/HBoxContainer/ScoreLabel
 @onready var label := $MarginContainer/HBoxContainer/Label
+@onready var sfx := $SFX
 @export var left_edge: Node2D
 @export var right_edge: Node2D
 @export var click_modifier := 2.0
@@ -38,8 +45,8 @@ func gen_obs():
 		var timer := randf_range(0.5,0.9)
 		await get_tree().create_timer(timer).timeout
 		
-		#var obs_type=obstacle_types[randi()%obstacle_types.size()]
-		var obs := coffee.instantiate()
+		var obs_type: PackedScene = obstacle_types[randi()%obstacle_types.size()]
+		var obs := obs_type.instantiate()
 		add_child(obs)
 
 		var x := randf_range(left_edge.position.x, right_edge.position.x)
@@ -52,11 +59,13 @@ func reduce_score():
 func add_score():
 	score += 1
 	score_label.text = "Score: " + str(score)
+	sfx.play();
 	if score>=winscore :
 		game_won()
 		
 		
 func game_won():
+	GlobalSoundManager.play_mg_complete();
 	GlobalDistractionManager.set_click_modifier(click_modifier)
 	queue_free()
 	

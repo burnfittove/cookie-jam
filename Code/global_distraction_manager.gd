@@ -10,7 +10,7 @@ var max_click_mod := 1.5;
 
 
 func _process(delta: float) -> void:
-	update_click_modifier(delta / 25);
+	update_click_modifier(delta / 20);
 
 
 ### ================== ###

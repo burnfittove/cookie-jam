@@ -1,10 +1,16 @@
 extends Area2D
 
+var rot: float;
+
+func _ready() -> void:
+	rot = randf_range(-360, 360);
+	rotation = rot
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-
-	position.y+=1.6
+	rot += .01;
+	rotation = rot
+	position.y+=1.84	# Increased by 15% (original: 1.6)
 	#get_parent().speed
 	if position.y>=750:
 		get_parent().reduce_score()

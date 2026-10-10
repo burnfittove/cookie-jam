@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c0anp1rb81b8e"]
+
+[ext_resource type="Script" uid="uid://cicvi5kr8ax3n" path="res://Scenes/Borna/CoffeeGame/coffee.gd" id="1_qwj2r"]
+[ext_resource type="Texture2D" uid="uid://dc5io7jlg6jsc" path="res://Sprites/Room Sprites/Coffee/loops_mini_game.png" id="2_qwj2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fwcc"]
+size = Vector2(94, 84)
+
+[node name="Node2D" type="Area2D" unique_id=753539501]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_qwj2r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1507029362]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_qwj2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=11461874]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_0fwcc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
