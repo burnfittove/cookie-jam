@@ -2,12 +2,6 @@ extends Control
 
 @onready var first_child := get_child(0);
 @export var active_room: RoomsEnum.Room_Type
-var room_manager: RoomManager;
-
-
-func _ready() -> void:
-	var node := get_node("/root/Main/RoomManager");
-	if (node != null): room_manager = node as RoomManager;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -20,8 +14,8 @@ func _process(_delta: float) -> void:
 	else: set_children_state(false);
 
 func check_for_valid_activity() -> bool:
-	if (room_manager == null): return false;
-	if (room_manager.current_room_type != active_room): return false;
+	if (RoomManager == null): return false;
+	if (RoomManager.current_room_type != active_room): return false;
 	return true;
 
 

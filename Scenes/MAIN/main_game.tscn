@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://lbnjejiorve4"]
+
+[ext_resource type="PackedScene" uid="uid://bva74s7bqjmh8" path="res://Scenes/Rooms/Main Room/main-room.tscn" id="1_d2xij"]
+[ext_resource type="PackedScene" uid="uid://q54v4qwwqafq" path="res://Scenes/Distractions/Typing Game/email-controller.tscn" id="2_l4nlb"]
+[ext_resource type="PackedScene" uid="uid://bsjjcdvos1kvd" path="res://Scenes/Borna/BORNA TESTING/hons_controller.tscn" id="3_ddboy"]
+[ext_resource type="PackedScene" uid="uid://sc6kcea8l7i" path="res://Scenes/Borna/BORNA TESTING/sweeper_controller.tscn" id="4_kfdmb"]
+[ext_resource type="PackedScene" uid="uid://bicrej1cg8owc" path="res://Code/Distractions/Match3/match3_controller.tscn" id="5_83mvf"]
+[ext_resource type="PackedScene" uid="uid://dw37d3fjjpl0l" path="res://Scenes/Distractions/Coffee Game/Controller/coffee_controller.tscn" id="6_qn4i6"]
+[ext_resource type="PackedScene" uid="uid://bh84k63h5ofop" path="res://Scenes/Borna/CoffeeGame/CoffeeGame.tscn" id="7_ywhef"]
+[ext_resource type="PackedScene" uid="uid://cs4aihcoijnos" path="res://Scenes/Map/map.tscn" id="8_m1ras"]
+[ext_resource type="PackedScene" uid="uid://xjuw67uvcgrc" path="res://Scenes/global-timer.tscn" id="9_rq50k"]
+[ext_resource type="PackedScene" uid="uid://dbxwhb0mhls3w" path="res://Scenes/Distractions/Cookie Collector/cookie-collector.tscn" id="10_eqnwd"]
+[ext_resource type="PackedScene" uid="uid://cftkwo67v7ac4" path="res://Scenes/Strikes/strike_counter.tscn" id="11_lcv6p"]
+[ext_resource type="AudioStream" uid="uid://2kxkb2nyvv8d" path="res://Sounds/Music/BG Music/BgMusic.wav" id="12_ptu50"]
+
+[sub_resource type="GDScript" id="GDScript_1f6jl"]
+resource_name = "start_game"
+script/source = "extends Node
+
+@export var start_room: PackedScene
+
+func _ready() -> void:
+	# Instantiate the first room
+	RoomManager.create_room(start_room, RoomsEnum.Room_Type.MAIN)	# HARD CODED ROOM TYPE; COULD CAUSE PROBLEMS
+"
+
+[node name="Main" type="Node" unique_id=1694300178]
+script = SubResource("GDScript_1f6jl")
+start_room = ExtResource("1_d2xij")
+
+[node name="EmailController" parent="." unique_id=1587489003 instance=ExtResource("2_l4nlb")]
+interval = 42
+difficulty = 20
+max_rand_num = 50
+check_for_active_room = true
+
+[node name="HonsController" parent="." unique_id=459550278 instance=ExtResource("3_ddboy")]
+interval = 38
+difficulty = 1
+check_for_active_room = true
+
+[node name="Sweeper_controller" parent="." unique_id=1424258307 instance=ExtResource("4_kfdmb")]
+interval = 60
+check_for_active_room = true
+
+[node name="Match3Controller" parent="." unique_id=1161232812 instance=ExtResource("5_83mvf")]
+interval = 80
+difficulty = 10
+check_for_other_distractions = false
+
+[node name="CoffeeController" parent="." unique_id=1479632043 instance=ExtResource("6_qn4i6")]
+difficulty = 20
+distraction_scene = ExtResource("7_ywhef")
+active_room = 1
+check_for_active_room = true
+check_for_other_distractions = false
+
+[node name="Map" parent="." unique_id=1908580526 instance=ExtResource("8_m1ras")]
+
+[node name="GlobalTimer" parent="." unique_id=296257864 instance=ExtResource("9_rq50k")]
+
+[node name="CookieCollector" parent="." unique_id=1791148422 instance=ExtResource("10_eqnwd")]
+
+[node name="StrikeCounter" parent="." unique_id=2111545922 instance=ExtResource("11_lcv6p")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1163893708]
+stream = ExtResource("12_ptu50")
+autoplay = true

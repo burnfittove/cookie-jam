@@ -1,13 +1,13 @@
-class_name RoomManager extends Node
+extends Node
 
 @export var start_room: PackedScene
 @export var map: Map;
 @export var current_room_type: RoomsEnum.Room_Type
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+# func _ready() -> void:
 	# Instantiate the first room
-	create_room(start_room, RoomsEnum.Room_Type.MAIN)	# HARD CODED ROOM TYPE; COULD CAUSE PROBLEMS
+	# create_room(start_room, RoomsEnum.Room_Type.MAIN)	# HARD CODED ROOM TYPE; COULD CAUSE PROBLEMS
 
 
 func create_room(room: PackedScene, room_type: RoomsEnum.Room_Type) -> void:

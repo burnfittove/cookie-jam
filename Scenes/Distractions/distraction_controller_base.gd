@@ -10,19 +10,16 @@ var interval_buffer;
 @export var check_for_other_distractions := true;
 var attack_stored := false;
 var is_distraction_active := false;
-var room_manager;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	interval_buffer = interval;
-	var node := get_node("/root/Main/RoomManager");
-	if (node != null): room_manager = node as RoomManager;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# If an attack is stored, start the distraction; please dont ask bro i dont gaf
 	if (attack_stored 
-		and room_manager.current_room_type == active_room 
+		and RoomManager.current_room_type == active_room 
 		and !GlobalDistractionManager.get_distraction_active_state()
 		and check_for_active_room):
 			start_game(); 
@@ -49,10 +46,13 @@ func _process(delta: float) -> void:
 	# Check if the player is in the active room, if not store the attack
 	if (!check_for_active_room):
 		start_game();
-	if (room_manager.current_room_type != active_room):
+		print("1")
+	if (RoomManager.current_room_type != active_room):
 		attack_stored = true;
+		print("2")
 	elif (check_for_active_room):
 		start_game();
+		print("3");
 
 func can_spawn(min_chance: int, max_chance: int) -> bool:
 	var rng := RandomNumberGenerator.new();
@@ -71,15 +71,14 @@ func get_difficulty() -> int:
 
 
 func check_for_visibility() -> bool:
-	if (room_manager == null): return false;
-	if (room_manager.current_room_type != active_room): return false;
+	if (RoomManager == null): return false;
+	if (RoomManager.current_room_type != active_room): return false;
 	return true;
 
 
 func set_children_state(active: bool) -> void:
 	if (get_child_count() == 0): return;
-	for child in get_children():
-		if (child == null): return;
-		if (active): child.show();
-		else: child.hide();	
-	
+	var child := get_child(0);
+	if (child == null): return;
+	if (active): child.show();
+	else: child.hide();
